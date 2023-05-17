@@ -2,14 +2,12 @@ package com.example.mealmovers_merchant.main;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.view.GravityCompat;
-import androidx.databinding.DataBindingComponent;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
@@ -24,19 +22,13 @@ import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -48,8 +40,7 @@ import com.example.mealmovers_merchant.databinding.ActivityMainBinding;
 import com.example.mealmovers_merchant.main.adapters.ClicksInterFaceOrdersRV;
 import com.example.mealmovers_merchant.main.adapters.NewOrderItem;
 import com.example.mealmovers_merchant.main.adapters.OrderItemAdapter;
-import com.example.mealmovers_merchant.main.models.AddressModel;
-import com.example.mealmovers_merchant.main.models.MenuItemModel;
+import com.example.mealmovers_merchant.main.use_cases.FireBaseCase;
 import com.example.mealmovers_merchant.main.models.OrderModel;
 import com.example.mealmovers_merchant.main.repositories.OrdersRepo;
 import com.example.mealmovers_merchant.main.viewModels.MainViewModel;
@@ -57,15 +48,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.io.Console;
-import java.io.EOFException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -107,6 +95,14 @@ public class MainActivity extends AppCompatActivity implements ClicksInterFaceOr
     Boolean firstClick = false;
     int renderCount = 0;
     MediaPlayer mediaPlayer;
+
+
+
+    private FireBaseCase fireBaseCase;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements ClicksInterFaceOr
         ordersRepo = OrdersRepo.getInstance();
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         orderDialog = new DialogOrder(this);
-
+        fireBaseCase = new FireBaseCase(this);
         initNewOrderDialog();
         handleArrowBackwardForward();
         observeOrdersLoading();
@@ -136,12 +132,12 @@ public class MainActivity extends AppCompatActivity implements ClicksInterFaceOr
 
     }
 
+
+
     private void initNotification() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
-        }
+        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
+        NotificationManager manager = getSystemService(NotificationManager.class);
+        manager.createNotificationChannel(channel);
     }
 
     @Override
@@ -605,64 +601,6 @@ public class MainActivity extends AppCompatActivity implements ClicksInterFaceOr
         binding.menuIconCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//                if (!isDrawerOpen) {
-//                    binding.drawerLayout.openDrawer(GravityCompat.END);
-//                    binding.menuIcon.animate().translationY(binding.menuIcon.getHeight()).alpha(0.0f).setDuration(500).setListener(new AnimatorListenerAdapter() {
-//                        @Override
-//                        public void onAnimationEnd(Animator animation) {
-//                            super.onAnimationEnd(animation);
-//                            binding.menuIcon.setVisibility(View.GONE);
-//                            binding.xButton.animate().alpha(1.0f).setDuration(500).setListener(new AnimatorListenerAdapter() {
-//                                @Override
-//                                public void onAnimationEnd(Animator animation) {
-//                                    super.onAnimationEnd(animation);
-//                                    binding.xButton.setVisibility(View.VISIBLE);
-//                                }
-//                            });
-//                        }
-//                    });
-//
-//
-//
-//                    isDrawerOpen = true;
-//                }else {
-//                    binding.drawerLayout.closeDrawer(GravityCompat.END);
-//
-//
-//                    binding.xButton.animate().translationY(binding.xButton.getHeight()).alpha(0.0f).setDuration(500).setListener(new AnimatorListenerAdapter() {
-//                        @Override
-//                        public void onAnimationEnd(Animator animation) {
-//                            super.onAnimationEnd(animation);
-//                            binding.xButton.setVisibility(View.GONE);
-////                            binding.menuIcon.animate().alpha(1.0f).setDuration(500).setListener(new AnimatorListenerAdapter() {
-////                                @Override
-////                                public void onAnimationEnd(Animator animation) {
-////                                    super.onAnimationEnd(animation);
-////                                    binding.menuIcon.setVisibility(View.VISIBLE);
-////                                }
-////                            });
-//                        }
-//                    });
-//                    isDrawerOpen = false;
-//
-//                }
-//                binding.menuIcon.animate().scaleX(0.0f).setDuration(400).setListener(new AnimatorListenerAdapter() {
-//                    @Override
-//                    public void onAnimationEnd(Animator animation) {
-//                        super.onAnimationEnd(animation);
-//                        binding.menuIcon.setVisibility(View.GONE);
-//                        binding.xButton.setVisibility(View.VISIBLE);
-//                        binding.xButton.animate().scaleY(0.0f).setDuration(8000).setListener(new AnimatorListenerAdapter() {
-//                            @Override
-//                            public void onAnimationEnd(Animator animation) {
-//                                super.onAnimationEnd(animation);
-//
-//                            }
-//                        });
-//                    }
-//                });
-
                 if (!isDrawerOpen) {
                     binding.drawerLayout.openDrawer(GravityCompat.END);
 //                    if (firstClick){
