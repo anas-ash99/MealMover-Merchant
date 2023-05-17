@@ -1,5 +1,4 @@
 # MealMover-Merchant
-Is a merchant side for my app Mealmovers where merchant can get live updte on any new order users made on the maoin app
-the app is bulid with java
+I have developed a merchant-side application for Mealmovers, allowing merchants to receive real-time updates on new orders made by users on the main app. The application was built using Java programming language.
 
 
