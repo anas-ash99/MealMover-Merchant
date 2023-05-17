@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                tools:context=".main.MainActivity">
+
+
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <LinearLayout
+                            android:id="@+id/topBar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:backgroundTint="#00FFFFFF"
+                            android:padding="8dp">
+
+
+                            <ImageView
+                                android:id="@+id/imageView"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@drawable/meal_movers_logo" />
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_weight="1"
+                                android:text="Restaurant Name"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textColor="#292828"
+                                android:textSize="18sp" />
+
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/menuIconCard"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:clickable="true"
+                                android:foreground="?attr/selectableItemBackground"
+                                android:shadowColor="@color/black"
+                                app:cardBackgroundColor="#00FFFFFF"
+                                app:cardCornerRadius="20dp"
+                                app:cardElevation="0dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center">
+
+
+                                    <ImageView
+                                        android:id="@+id/menuIcon"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/ic_baseline_menu_24"
+                                        android:animateLayoutChanges="true"
+
+                                        android:src="@drawable/ic_baseline_menu_24" />
+
+
+<!--                                    <TextView-->
+<!--                                        android:id="@+id/xButton"-->
+<!--                                        android:layout_width="wrap_content"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:layout_gravity="center"-->
+<!--                                        android:visibility="gone"-->
+<!--                                        android:animateLayoutChanges="true"-->
+<!--                                        android:text="X"-->
+<!--                                        android:textSize="20dp" />-->
+
+                                    <ImageView
+                                        android:id="@+id/xButton"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:animateLayoutChanges="true"
+                                        android:visibility="gone"
+                                        app:srcCompat="@drawable/ic_baseline_arrow_forward_24" />
+
+
+                                </LinearLayout>
+
+                            </androidx.cardview.widget.CardView>
+
+
+                        </LinearLayout>
+
+
+                        <View
+                            android:id="@+id/divider"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="?android:attr/listDivider" />
+                        <androidx.drawerlayout.widget.DrawerLayout
+                            android:id="@+id/drawerLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                           >
+
+<!--                        <androidx.cardview.widget.CardView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="50dp"-->
+<!--                            android:shadowColor="@color/black"-->
+<!--                            android:layout_marginBottom="10dp"-->
+<!--                            >-->
+
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/textView2"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_gravity="center_vertical"-->
+<!--                                android:layout_marginLeft="10dp"-->
+<!--                                android:text="TODAY'S ORDERS"-->
+<!--                                android:textAppearance="@style/TextAppearance.AppCompat.Body1"-->
+<!--                                android:textSize="16sp" />-->
+<!--                        </androidx.cardview.widget.CardView>-->
+
+                        <androidx.core.widget.NestedScrollView
+                            android:id="@+id/nestedScrollView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#1AFFFFFF"
+                            android:fillViewport="true">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/newOrdersLayout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:padding="10dp">
+
+
+                                    <TextView
+                                        android:id="@+id/newTV"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="NEW (0)"
+                                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                        android:textSize="16sp" />
+
+                                    <androidx.cardview.widget.CardView
+                                        android:id="@+id/newCard"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:visibility="visible"
+
+                                        app:cardElevation="8dp">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center"
+                                            android:orientation="vertical"
+
+                                            android:padding="10dp">
+
+
+                                            <ImageView
+                                                android:id="@+id/imageView3"
+                                                android:layout_width="80dp"
+                                                android:layout_height="80dp"
+                                                android:src="@drawable/cook_person" />
+
+                                            <TextView
+                                                android:id="@+id/textView3"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="10dp"
+                                                android:text="New order requests will be shown here" />
+                                        </LinearLayout>
+
+                                    </androidx.cardview.widget.CardView>
+
+                                    <androidx.recyclerview.widget.RecyclerView
+
+                                        android:id="@+id/newOrdersRV"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="15dp"
+                                        android:visibility="gone" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/kitchenOrdersLayout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:padding="10dp">
+
+
+                                    <TextView
+                                        android:id="@+id/kitchenTV"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="KITCHEN (0)"
+                                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                        android:textSize="16sp" />
+
+                                    <androidx.cardview.widget.CardView
+                                        android:id="@+id/kitchenOrdersCard"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        app:cardElevation="8dp">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center"
+                                            android:orientation="vertical"
+                                            android:padding="10dp">
+
+
+                                            <ImageView
+
+                                                android:layout_width="80dp"
+                                                android:layout_height="80dp"
+                                                android:src="@drawable/woman_cooking" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="10dp"
+                                                android:gravity="center"
+                                                android:text="You can move the order to this section when the kitchen starts preparing it" />
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/kitchenOrdersRV"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="10dp"
+                                        android:visibility="gone" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/onTheWayOrdersLayout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:padding="10dp">
+
+
+                                    <TextView
+
+                                        android:id="@+id/beingDeliveredTV"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="BEING DELIVERED (0)"
+                                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                        android:textSize="16sp" />
+
+                                    <androidx.cardview.widget.CardView
+                                        android:id="@+id/beingDeliveredCard"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center"
+                                            android:orientation="vertical"
+
+                                            android:padding="10dp">
+
+
+                                            <ImageView
+
+                                                android:layout_width="82dp"
+                                                android:layout_height="82dp"
+                                                android:src="@drawable/deliveryman_riding_bike" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="10dp"
+                                                android:gravity="center"
+                                                android:text="Move the order to this section when the order is sent for delivery" />
+                                        </LinearLayout>
+
+                                    </androidx.cardview.widget.CardView>
+
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/beingDeliveredOrdersRV"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="10dp"
+                                        android:visibility="gone" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/deliveredOrdersLayout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="10dp"
+                                    android:orientation="vertical"
+                                    android:padding="10dp">
+
+
+                                    <TextView
+                                        android:id="@+id/deliveredTV"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="DELIVERED (0)"
+                                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                        android:textSize="16sp" />
+
+                                    <androidx.cardview.widget.CardView
+                                        android:id="@+id/deliveredOrdersCard"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        app:cardElevation="8dp">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center"
+                                            android:orientation="vertical"
+
+                                            android:padding="10dp">
+
+
+                                            <ImageView
+
+                                                android:layout_width="80dp"
+                                                android:layout_height="80dp"
+                                                android:src="@drawable/food_delivered_pic" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="10dp"
+                                                android:gravity="center"
+                                                android:text="Orders that got delivered should be placed here" />
+                                        </LinearLayout>
+
+                                    </androidx.cardview.widget.CardView>
+
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/deliveredOrdersRV"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="10dp"
+                                        android:visibility="gone" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </androidx.core.widget.NestedScrollView>
+
+                            <com.google.android.material.navigation.NavigationView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:headerLayout="@layout/drawer_header"
+                                app:menu="@menu/nav_drawer"
+                                android:layout_gravity="end"/>
+                        </androidx.drawerlayout.widget.DrawerLayout>
+
+            </LinearLayout>
+
+
+
+
+                <!--    <LinearLayout-->
+                <!--        android:id="@+id/new_orderLayout"-->
+                <!--        android:layout_width="match_parent"-->
+                <!--        android:layout_height="match_parent"-->
+                <!--        android:layout_margin="10dp"-->
+                <!--        android:background="#F8F8F8"-->
+                <!--        android:orientation="vertical"-->
+                <!--        android:visibility="gone"-->
+                <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--        app:layout_constraintEnd_toEndOf="parent"-->
+                <!--        app:layout_constraintStart_toStartOf="parent"-->
+                <!--        app:layout_constraintTop_toTopOf="parent">-->
+
+                <!--        <include layout="@layout/order_layout" android:id="@+id/orderLayout"  />-->
+
+                <!--    </LinearLayout>-->
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu >
+
+      <item android:id="@+id/profileIcon"
+            android:icon="@drawable/ic_profile_24"
+            android:title="Profile"/>
+      <item
+           android:id="@+id/logout"
+          android:icon="@drawable/ic_baseline_logout_24"
+           android:title="Log Out"/>
+
+      <item
+          android:id="@+id/saved_tweet"
+          android:icon="@drawable/save_icon"
+          android:title="Saved Tweets"/>
+</menu>
