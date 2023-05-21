@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.mealmovers_merchant.main.CallbackMethod;
 import com.example.mealmovers_merchant.main.models.OrderModel;
 import com.example.mealmovers_merchant.main.retrofit.RetrofitInstance;
 
@@ -18,11 +19,9 @@ import retrofit2.Response;
 
 public class OrdersRepo {
 
-
     private static OrdersRepo instance;
     MutableLiveData<String>  newOrdersLoading = new MutableLiveData<>();
     List<OrderModel> newOrders = new ArrayList<>();
-
 
 
 
@@ -32,6 +31,25 @@ public class OrdersRepo {
         }
         return instance;
     }
+
+
+
+
+    public void getAllNewOrders(CallbackMethod<List<OrderModel>> callback){
+
+        RetrofitInstance.ordersApi().getNewOrders("").enqueue(new Callback<List<OrderModel>>() {
+            @Override
+            public void onResponse(Call<List<OrderModel>> call, Response<List<OrderModel>> response) {
+                callback.onDone(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<OrderModel>> call, Throwable t) {
+                callback.onError(new Exception(t));
+            }
+        });
+    }
+
 
     public List<OrderModel> getNewOrders() {
         return newOrders;
@@ -88,6 +106,13 @@ public class OrdersRepo {
         });
 
     }
+
+
+
+     public void getRestaurant(String id, CallbackMethod<List<OrderModel>> callbackMethod){
+
+     }
+
 
 
 

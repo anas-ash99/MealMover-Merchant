@@ -1,11 +1,13 @@
 package com.example.mealmovers_merchant.main.use_cases;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.example.mealmovers_merchant.R;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -19,12 +21,15 @@ import java.util.concurrent.Executor;
 
 public class FireBaseCase {
 
-    private Context context;
+    private final Context context;
+    private final MediaPlayer mediaPlayer;
     FirebaseFirestore db  = FirebaseFirestore.getInstance();
     CollectionReference collectionRef = db.collection("orders");
     CollectionReference orderStatusCollectionRef = db.collection("order status");
     public FireBaseCase(Context context) {
         this.context = context;
+
+        mediaPlayer = MediaPlayer.create(context,R.raw.mewe);
     }
 
 
@@ -52,7 +57,7 @@ public class FireBaseCase {
 //                                    ordersRepo.updateOrderStatus(getApplication(), order.get_id(), "received");
 //                                    db.collection("orders").document(orderId).update("status", "received");
 ////                                    createNotification();
-//                                    mediaPlayer.start();
+                                    mediaPlayer.start();
                                     break;
                                 }
 

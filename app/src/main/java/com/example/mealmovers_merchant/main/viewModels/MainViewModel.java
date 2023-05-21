@@ -5,8 +5,10 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.mealmovers_merchant.main.CallbackMethod;
 import com.example.mealmovers_merchant.main.models.OrderModel;
 import com.example.mealmovers_merchant.main.repositories.OrdersRepo;
+import com.google.protobuf.Any;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +21,13 @@ public class MainViewModel extends ViewModel {
     List<OrderModel> beingDeliveredOrders = new ArrayList<>();
     List<OrderModel> deliveredOrders = new ArrayList<>();
     List<OrderModel> notConfirmedOrders = new ArrayList<>();
+    private OrdersRepo repo = OrdersRepo.getInstance();
+    public Any restaurant;
 
 
+    public void init(){
 
+    }
     public List<OrderModel> getTodaysOrder() {
         return todaysOrder;
     }
@@ -77,9 +83,23 @@ public class MainViewModel extends ViewModel {
     }
 
     public void addOrder(OrderModel order) {
-
         newOrders.add(0, order);
     }
+
+
+
+
+
+     private void getRestaurant(){
+
+
+    }
+
+
+
+
+
+
     public List<OrderModel> getNotConfirmedOrders() {
         return notConfirmedOrders;
     }
@@ -123,4 +143,9 @@ public class MainViewModel extends ViewModel {
     public void setDeliveredOrders(List<OrderModel> deliveredOrders) {
         this.deliveredOrders = deliveredOrders;
     }
+
 }
+
+
+
+

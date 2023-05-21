@@ -40,6 +40,7 @@ import com.example.mealmovers_merchant.databinding.ActivityMainBinding;
 import com.example.mealmovers_merchant.main.adapters.ClicksInterFaceOrdersRV;
 import com.example.mealmovers_merchant.main.adapters.NewOrderItem;
 import com.example.mealmovers_merchant.main.adapters.OrderItemAdapter;
+import com.example.mealmovers_merchant.main.dialogs.DialogOrder;
 import com.example.mealmovers_merchant.main.use_cases.FireBaseCase;
 import com.example.mealmovers_merchant.main.models.OrderModel;
 import com.example.mealmovers_merchant.main.repositories.OrdersRepo;
@@ -63,7 +64,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity implements ClicksInterFaceOrdersRV {
 
 
-    ActivityMainBinding binding;
+    private ActivityMainBinding binding;
     MainViewModel mainViewModel;
     List<OrderModel> newOrders = new ArrayList<>();
     MutableLiveData<Integer> selectedEstimationTime = new MutableLiveData<>(0);
@@ -114,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements ClicksInterFaceOr
         openDrawer();
         ordersRepo = OrdersRepo.getInstance();
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        mainViewModel.init();
         orderDialog = new DialogOrder(this);
         fireBaseCase = new FireBaseCase(this);
         initNewOrderDialog();
@@ -383,7 +385,7 @@ public class MainActivity extends AppCompatActivity implements ClicksInterFaceOr
             public void onClick(View v) {
                 if (selectedEstimationTime.getValue() != 0 || !order.getDeliveryTime().equals("As soon as possible")){
                     order.setStatus("confirmed");
-                    sendNotificationOrderStatus("confirmed", order.get_id());
+//                    sendNotificationOrderStatus("confirmed", order.get_id());
                     mainViewModel.addOrder(order);
                     initNewOrdersRecyclerView();
                     newOrdersCount.setValue(newOrdersCount.getValue() + 1);

@@ -1,4 +1,4 @@
-package com.example.mealmovers_merchant.main;
+package com.example.mealmovers_merchant.main.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -16,6 +16,7 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mealmovers_merchant.R;
+import com.example.mealmovers_merchant.main.MainActivity;
 import com.example.mealmovers_merchant.main.models.OrderModel;
 
 import java.time.LocalDateTime;
@@ -29,6 +30,8 @@ public class DialogOrder  {
     TextView thirtyMinTV, fortyMinTV, sixtyMinTV, eightyMinTV,hundredMinTV;
     TextView deliveryTime, paymentStatus, totalPrice, phoneNumber, deliveryType, addressLine2, addressLine1, customerName;
     RecyclerView orderMenuItemsRV;
+
+
     public DialogOrder(MainActivity activity) {
         this.activity = activity;
         initDialog();
@@ -43,7 +46,7 @@ public class DialogOrder  {
         activity.initOrderItemsRV();
         selectEstimationTime();
         activity.handleConfirmOrderClick();
-//        handleConfirmOrderClick();
+
         if (order.getScheduled().equals(true)){
             dialog.findViewById(R.id.timeHeaderTv).setVisibility(View.GONE);
             dialog.findViewById(R.id.timeList).setVisibility(View.GONE);
@@ -57,6 +60,8 @@ public class DialogOrder  {
         dialog.show();
 
     }
+
+
 
 
     private void selectEstimationTime() {
