@@ -18,6 +18,7 @@ import com.example.mealmovers_merchant.main.enum_classes.OrderStatus;
 import com.example.mealmovers_merchant.main.models.OrderModel;
 import com.example.mealmovers_merchant.main.models.RestaurantModel;
 import com.example.mealmovers_merchant.main.repositories.OrdersRepo;
+import com.example.mealmovers_merchant.main.use_cases.CreateNotification;
 import com.example.mealmovers_merchant.main.use_cases.dialogs.DialogOrder;
 import com.example.mealmovers_merchant.main.use_cases.firebase_case.FireBaseCase;
 import java.util.ArrayList;
@@ -79,6 +80,7 @@ public class MainViewModel extends ViewModel {
 
             if (isPageInited && results.size() != 0){
                 mediaPlayer.start();
+                CreateNotification.createNotification(activity);
             }
              notConfirmedOrders.removeAll(notConfirmedOrders);
              notConfirmedOrders = results;

@@ -20,6 +20,8 @@ import android.widget.Toast;
 
 import com.example.mealmovers_merchant.R;
 import com.example.mealmovers_merchant.databinding.ActivityMainBinding;
+import com.example.mealmovers_merchant.main.repositories.OrdersRepo;
+import com.example.mealmovers_merchant.main.use_cases.CreateNotification;
 import com.example.mealmovers_merchant.main.viewModels.MainViewModel;
 
 import java.util.HashMap;
@@ -51,48 +53,10 @@ public class MainActivity extends AppCompatActivity {
         openDrawer();
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         mainViewModel.init(this, binding);
-        initNotification();
-        createPendingIntent();
+
 
     }
 
-
-
-    private void initNotification() {
-        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
-        NotificationManager manager = getSystemService(NotificationManager.class);
-        manager.createNotificationChannel(channel);
-    }
-
-
-
-
-    private void createPendingIntent() {
-        notificationIntent = new Intent(this, MainActivity.class);
-        pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_MUTABLE);
-    }
-
-
-    private void createNotification() {
-
-        try {
-
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this,CHANNEL_ID );
-            builder.setContentTitle("New Order")
-                    .setContentText("you have received new order")
-                    .setSmallIcon(R.drawable.meal_movers_logo)
-                    .setAutoCancel(true)
-                    .setContentIntent(pendingIntent)
-                    .setPriority(NotificationCompat.PRIORITY_HIGH);
-
-            NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(MainActivity.this);
-            notificationManagerCompat.notify(NOTIFICATION_ID, builder.build());
-
-        }catch (Exception e){
-            Toast.makeText(this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-
-    }
 
     public void sendNotificationOrderStatus(String status, String id){
         Map<String, String> notification = new HashMap<>();
@@ -119,12 +83,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!isDrawerOpen) {
                     binding.drawerLayout.openDrawer(GravityCompat.END);
-//                    if (firstClick){
-//                        binding.xButton.animate().rotation(180.0f);
-//                        Toast.makeText(MainActivity.this, "true", Toast.LENGTH_SHORT).show();
-//                    }
-//                    binding.menuIcon.animate().rotation(180.0f);
-
                     binding.menuIcon.animate().rotation(180.0f).setListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
@@ -150,17 +108,7 @@ public class MainActivity extends AppCompatActivity {
                             binding.menuIcon.setVisibility(View.VISIBLE);
                         }
                     });
-//                    binding.xButton.animate().rotation(-180.0f).setListener(new AnimatorListenerAdapter() {
-//                        @Override
-//                        public void onAnimationEnd(Animator animation) {
-//                            super.onAnimationEnd(animation);
-//
-//                            binding.xButton.setVisibility(View.GONE);
-//                            binding.menuIcon.setVisibility(View.VISIBLE);
-//                            animation.removeAllListeners();
-//
-//                        }
-//                    });
+
                     isDrawerOpen = false;
 
                 }
