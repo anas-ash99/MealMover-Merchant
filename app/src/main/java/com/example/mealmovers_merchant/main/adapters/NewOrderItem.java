@@ -37,6 +37,7 @@ public class NewOrderItem extends RecyclerView.Adapter<NewOrderItem.MyViewHolder
     @Override
     public void onBindViewHolder(@NonNull NewOrderItem.MyViewHolder holder, int position) {
         MenuItemModel item = items.get(position);
+        System.out.println(item.getName());
 //        String date = String.valueOf(item.getCreatedAt()).substring(3, 10);
         holder.itemPrice.setText(item.getPrice() + "€");
         holder.itemName.setText(item.getName());

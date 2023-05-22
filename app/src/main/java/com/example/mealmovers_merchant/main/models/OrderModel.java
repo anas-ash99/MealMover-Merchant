@@ -6,7 +6,9 @@ import java.util.List;
 
 public class OrderModel {
     String _id;
+    String  orderFireStoreId;
     String restaurant_id;
+    String restaurantName;
     String customer_name;
     String created_at;
     Double orderPrice;
@@ -19,6 +21,13 @@ public class OrderModel {
     LocalDateTime timeDelivery;
     Boolean isScheduled;
 
+    public String getRestaurantName() {
+        return restaurantName;
+    }
+
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
+    }
     public Boolean getScheduled() {
         return isScheduled;
     }
@@ -96,6 +105,14 @@ public class OrderModel {
 
     public void setCreated_at(String created_at) {
         this.created_at = created_at;
+    }
+
+    public String getOrderFireStoreId() {
+        return orderFireStoreId;
+    }
+
+    public void setOrderFireStoreId(String orderFireStoreId) {
+        this.orderFireStoreId = orderFireStoreId;
     }
 
 

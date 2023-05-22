@@ -1,5 +1,6 @@
 package com.example.mealmovers_merchant.main.adapters;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -20,8 +21,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mealmovers_merchant.R;
+import com.example.mealmovers_merchant.main.ExtensionMethods;
 import com.example.mealmovers_merchant.main.models.MenuItemModel;
 import com.example.mealmovers_merchant.main.models.OrderModel;
+import com.example.mealmovers_merchant.main.use_cases.dialogs.DialogOrder;
+import com.example.mealmovers_merchant.main.viewModels.MainViewModel;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,59 +36,58 @@ public class OrderItemAdapter  extends RecyclerView.Adapter<OrderItemAdapter.MyV
 
 
     Context context;
-    List<OrderModel> orders = new ArrayList<>();
-    ClicksInterFaceOrdersRV clicksInterFaceOrdersRV;
+    List<OrderModel> orders;
+    private DialogOrder orderDialog;
+
+    private MainViewModel viewModel;
     public void setOrders(List<OrderModel> orders) {
         this.orders = orders;
         notifyDataSetChanged();
     }
 
-    public OrderItemAdapter(Context context, List<OrderModel> orders, ClicksInterFaceOrdersRV clicksInterFaceOrdersRV) {
+    public OrderItemAdapter(Context context, List<OrderModel> orders,MainViewModel viewModel) {
         this.context = context;
         this.orders = orders;
-        this.clicksInterFaceOrdersRV = clicksInterFaceOrdersRV;
+        this.viewModel = viewModel;
+
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        orderDialog = new DialogOrder(context, null);
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.order_item, parent, false);
         return new OrderItemAdapter.MyViewHolder(view);
     }
 
-    public void addOrderToList(OrderModel order){
-        orders.add(0, order);
-        notifyDataSetChanged();
 
-    }
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         OrderModel order = orders.get(position);
 
         try {
-//            String date = String.valueOf(order.getCreated_at()).substring(11, 16);
-            SimpleDateFormat parser = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy");
-            Date date = parser.parse(order.getCreated_at());
-            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
-            String formattedDate = formatter.format(date);
 
+            String hourMinute = ExtensionMethods.toHourAndMinute(order.getCreated_at());
             int productsQuantity = 0;
+
             holder.street_name.setText(order.getAddress().getStreetName() + " " + order.getAddress().getHouseNumber());
             holder.customer_name.setText(order.getAddress().getName());
             for (MenuItemModel item: order.getItems()) {
                 productsQuantity = productsQuantity + item.getQuantity();
             }
-            holder.ordered_at.setText(formattedDate);
+            holder.ordered_at.setText(hourMinute);
             holder.quantityAndPrice.setText(productsQuantity + " Products" + " (" + order.getOrderPrice() + ")");
-            if (order.getStatus().equals("delivered")){
-                holder.moveOrderIcon.setVisibility(View.GONE);
-            }
+
+            if (order.getStatus().equals("delivered")){holder.moveOrderIcon.setVisibility(View.GONE);}
+            holder.moveOrderIcon.setOnClickListener(v -> {viewModel.handleMoveOrderClick(order);});
+            holder.itemView.setOnClickListener(v -> orderDialog.showAlreadyExistOrderDialog(order));
         }catch (Exception e){
 
-            Log.e("order item", e.toString());
-
+            Log.e("order item", e.getMessage(), e);
+            Toast.makeText(context, "Something went wrong with order item adapter", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -106,21 +109,9 @@ public class OrderItemAdapter  extends RecyclerView.Adapter<OrderItemAdapter.MyV
             ordered_at = itemView.findViewById(R.id.ordered_at);
             moveOrderIcon = itemView.findViewById(R.id.moveOrderIcon);
 
-            moveOrderIcon.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    clicksInterFaceOrdersRV.onMoveOrderClick(orders.get(getPosition()));
-//                    orders.remove(orders.get(getPosition()));
-//                    notifyItemRemoved(getAdapterPosition());
-                }
-            });
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showNewOrderDialog(orders.get(getPosition()));
-                }
-            });
+
+
 
 
         }

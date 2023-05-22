@@ -5,7 +5,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
+        <data>
+            <variable
+                name="restaurant"
+                type="com.example.mealmovers_merchant.main.models.RestaurantModel" />
+        </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
@@ -55,7 +59,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="15dp"
                                 android:layout_weight="1"
-                                android:text="Restaurant Name"
+                                android:text="@{restaurant.name}"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                 android:textColor="#292828"
                                 android:textSize="18sp" />

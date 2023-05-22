@@ -35,6 +35,18 @@ public class RetrofitInstance {
     }
 
 
+    public static RestaurantApi restaurantApi(){
+        if (restaurantRetrofit == null){
+            restaurantRetrofit = new Retrofit.Builder()
+                    .baseUrl(baseUrl)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+
+        return restaurantRetrofit.create(RestaurantApi.class);
+    }
+
+
 
 
 
