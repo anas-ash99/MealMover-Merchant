@@ -1,14 +1,11 @@
 # MealMover Merchant App
 
-
-MealMover Merchant is a merchant-side application developed for Mealmovers, designed to provide merchants with real-time updates on new orders made by users on the main app. This readme file provides an overview of the application, its features, and the technologies used in its development.
-MealMover Merchant is a merchant-side application developed for Mealmovers, designed to provide merchants with real-time updates on new orders made by users on the main app. With this app, merchants can view order details, change order status, and mark orders as fulfilled, ensuring customers stay updated on their orders.
+I have developed a merchant-side application for Mealmovers, allowing merchants to receive real-time updates on new orders made by users on the main app. The application was built using Java programming language.
 
 ## Features
 
 - Real-time order updates: Merchants can receive instant notifications about new orders placed by users on the main Mealmovers app. This allows them to stay updated and respond promptly to customer orders.
 - Order management: The app provides a user-friendly interface for managing orders. Merchants can view order details, update the order status, mark orders as fulfilled, and track the progress of each order.
-- Order history: Merchants can access a comprehensive order history that provides a record of all past orders. This helps in tracking sales, analyzing customer preferences, and maintaining business records.
 - Seamless integration: The MealMover Merchant app seamlessly integrates with the Mealmovers platform, ensuring efficient communication between users and merchants.
 
 ## Technologies Used
