@@ -51,7 +51,7 @@ public class NewOrderItem extends RecyclerView.Adapter<NewOrderItem.MyViewHolder
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-       TextView itemQuantity, itemPrice, itemName, ordered_at;
+       TextView itemQuantity, itemPrice, itemName;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

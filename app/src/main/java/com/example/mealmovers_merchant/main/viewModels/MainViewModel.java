@@ -53,7 +53,6 @@ public class MainViewModel extends ViewModel {
         fetchAllOrders();
         getRestaurant();
         mediaPlayer = new MediaPlayer();
-        observeNewOrdersFirebase();
         mediaPlayer = MediaPlayer.create(activity, R.raw.mewe);
         handlePageRefresh();
 
@@ -73,7 +72,7 @@ public class MainViewModel extends ViewModel {
         });
     }
 
-    private void observeNewOrdersFirebase() {
+    public void observeNewOrdersFirebase() {
         try {
         fireBaseCase.listingToNewOrders(restaurant_id, results -> {
 //            orderDialog.dialog.hide();

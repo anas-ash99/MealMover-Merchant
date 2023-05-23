@@ -58,6 +58,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mainViewModel.observeNewOrdersFirebase();
+
+
+    }
+
     public void sendNotificationOrderStatus(String status, String id){
         Map<String, String> notification = new HashMap<>();
         notification.put("order_id", id);

@@ -21,5 +21,5 @@ The MealMover Merchant app is built using the following technologies:
 ## Usage
 
 
-By simply clicking [here](https://drive.google.com/file/d/1mrdS0GgXLzRcxDOG37z0kWrDlCo4nOc1/view?usp=share_link), you can download the APK file of the app. Once the MealMover Merchant app is successfully installed and launched, there is no need to sign in or sign up. The app automatically logs in as Domino's, displaying only the orders placed through the main app on the screen.
+By simply clicking [here](https://drive.google.com/file/d/1p5dyj6xgZxGLenz5NVMaJhYuNFmujMCs/view?usp=share_link), you can download the APK file of the app. Once the MealMover Merchant app is successfully installed and launched, there is no need to sign in or sign up. The app automatically logs in as Domino's, displaying only the orders placed through the main app on the screen.
 

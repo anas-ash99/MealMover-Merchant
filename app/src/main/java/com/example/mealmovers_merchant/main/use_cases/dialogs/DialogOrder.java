@@ -65,7 +65,7 @@ public class DialogOrder  {
             dialog.findViewById(R.id.timeList).setVisibility(View.VISIBLE);
             confirmButton.setCardBackgroundColor(context.getColor(R.color.secondary_background));
         }
-
+        dialog.setCancelable(false);
         dialog.show();
 
     }
@@ -89,28 +89,14 @@ public class DialogOrder  {
 
 
     public void showAlreadyExistOrderDialog(OrderModel order) {
-
-
         this.order = order;
         initNewOrder();
         initOrderItemsRV();
         setTimeLayout.setVisibility(View.GONE);
         newLayout.setVisibility(View.GONE);
         xButton.setVisibility(View.VISIBLE);
-//        customerName.setText(order.getAddress().getName());
-//        addressLine1.setText(order.getAddress().getStreetName()+ " " + order.getAddress().getHouseNumber() );
-//        addressLine2.setText(order.getAddress().getZipCode() + " " + order.getAddress().getCity());
-//        phoneNumber.setText(order.getAddress().getPhoneNumber());
-//        deliveryType.setText(order.getType());
-//        totalPrice.setText(order.getOrderPrice() + "€");
-//        paymentStatus.setText(order.getPaymentStatus());
-//        deliveryTime.setText(order.getDeliveryTime());
-//        NewOrderItem newOrderItem = new NewOrderItem(context, order.getItems());
-//        orderMenuItemsRV.setAdapter(newOrderItem);
-//        orderMenuItemsRV.setLayoutManager(new LinearLayoutManager(context));
-
         xButton.setOnClickListener(v -> dialog.hide());
-       dialog.show();
+        dialog.show();
 
     }
 
@@ -254,14 +240,11 @@ public class DialogOrder  {
         addressLine1.setText(order.getAddress().getStreetName()+ " " + order.getAddress().getHouseNumber() );
         addressLine2.setText(order.getAddress().getZipCode() + " " + order.getAddress().getCity());
         phoneNumber.setText(order.getAddress().getPhoneNumber());
-        deliveryType.setText(order.getType().toUpperCase());
+//        deliveryType.setText(order.getType().toUpperCase());
         totalPrice.setText(order.getOrderPrice() + "€");
         paymentStatus.setText(order.getPaymentStatus());
-        if (DataHolder.getLoggedInRestaurant() == null){
-            restaurantName.setText(order.getRestaurantName());
-        }
-
-        if (order.getScheduled().equals(false)){
+        restaurantName.setText(order.getRestaurantName());
+        if (order.getDeliveryTime().equals("As soon as possible")){
             deliveryTime.setText("ASAP");
         }else {
             deliveryTime.setText(order.getDeliveryTime());
