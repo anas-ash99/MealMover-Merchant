@@ -2,26 +2,17 @@ package com.example.mealmovers_merchant.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.mealmovers_merchant.R;
-import com.example.mealmovers_merchant.databinding.ActivityMainBinding;
-import com.example.mealmovers_merchant.main.repositories.OrdersRepo;
-import com.example.mealmovers_merchant.main.use_cases.CreateNotification;
 import com.example.mealmovers_merchant.main.viewModels.MainViewModel;
 
 import java.util.HashMap;
@@ -30,16 +21,11 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
 
-    private ActivityMainBinding binding;
+    private ViewDataBinding binding;
 
     private MainViewModel mainViewModel;
-    private final String CHANNEL_ID = "myChanelId";
-    private final String CHANNEL_NAME = "OrderNotification";
-    private final int NOTIFICATION_ID =  0;
-    private PendingIntent pendingIntent;
-    private Intent notificationIntent;
     private Boolean isDrawerOpen = false;
-    private Boolean firstClick = false;
+
 
 
     @Override

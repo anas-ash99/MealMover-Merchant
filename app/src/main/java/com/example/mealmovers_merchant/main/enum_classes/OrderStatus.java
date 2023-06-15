@@ -8,7 +8,7 @@ public enum OrderStatus {
     DELIVERED("delivered"),
     NOT_CONFIRMED("not_confirmed");
 
-    String value;
+    final String value;
     OrderStatus(String value) {
         this.value = value;
     }

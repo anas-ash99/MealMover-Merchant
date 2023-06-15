@@ -40,7 +40,10 @@ public class OrdersRepo {
 
 
 
-    public void getAllNewOrders(String restaurantId,  CallbackMethod<List<OrderModel>> callback){
+    public void getAllNewOrders(String restaurantId,  CallbackMethod<List<OrderModel>> callback) throws InterruptedException {
+
+
+        RetrofitInstance.ordersApi().getNewOrders(restaurantId).wait();
         RetrofitInstance.ordersApi().getNewOrders(restaurantId).enqueue(new Callback<List<OrderModel>>() {
             @Override
             public void onResponse(Call<List<OrderModel>> call, Response<List<OrderModel>> response) {

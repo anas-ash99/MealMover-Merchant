@@ -6,12 +6,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.databinding.ViewDataBinding;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.mealmovers_merchant.R;
-import com.example.mealmovers_merchant.databinding.ActivityMainBinding;
 import com.example.mealmovers_merchant.main.DataHolder;
-import com.example.mealmovers_merchant.main.ExtensionMethods;
+import com.example.mealmovers_merchant.main.DataState;
 import com.example.mealmovers_merchant.main.MainActivity;
 import com.example.mealmovers_merchant.main.adapters.OrderItemAdapter;
 import com.example.mealmovers_merchant.main.enum_classes.OrderStatus;
@@ -34,8 +35,9 @@ public class MainViewModel extends ViewModel {
     List<OrderModel> deliveredOrders = new ArrayList<>();
     List<OrderModel> notConfirmedOrders = new ArrayList<>();
     Boolean isPageInited = false;
+    private MutableLiveData<DataState> _orders = new MutableLiveData<>();
     private MainActivity activity;
-    private ActivityMainBinding binding;
+    private ViewDataBinding binding;
     private OrdersRepo repo;
     private RestaurantModel restaurant;
     private FireBaseCase fireBaseCase;
@@ -44,7 +46,7 @@ public class MainViewModel extends ViewModel {
     private final String restaurant_id = "641a35f33f50168a64ca2f68";
 
 
-    public void init(MainActivity activity, ActivityMainBinding binding){
+    public void init(MainActivity activity, ViewDataBinding binding){
         this.binding = binding;
         this.activity = activity;
         fireBaseCase = new FireBaseCase(activity);
@@ -57,6 +59,11 @@ public class MainViewModel extends ViewModel {
         handlePageRefresh();
 
         isPageInited = true;
+
+
+
+
+
     }
 
     private void getRestaurant() {
